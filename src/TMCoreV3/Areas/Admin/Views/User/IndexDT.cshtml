@@ -1,0 +1,174 @@
+﻿@model TMCoreV3.Areas.Admin.ViewModels.User.UserIndex
+
+@using Microsoft.AspNetCore.Identity
+@using TMCoreV3.Areas.Admin.ViewModels
+@using TMCoreV3.DataAccess.Models.User
+
+@inject SignInManager<AuthUser> SignInManager
+@inject UserManager<AuthUser> UserManager
+@inject RoleManager<AuthRole> RoleManager
+
+@{
+    ViewData["Title"] = "User Maintenance";
+}
+
+<div class="col-lg-12">
+    <h1 class="page-header">Users</h1>
+
+
+
+    <div class="btn-toolbar">
+        <a asp-action="NewUser" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i> Create User</a>
+    </div>
+    <h4 />
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-users fa-fw"></i> User Maintenance
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    @*<div class="row">
+                            <div class="col-md-12">
+                                <section>
+                                    <form asp-controller="User" asp-route-returnurl="/admin/index" method="post" class="form-horizontal">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <table id="authUser" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Email</th>
+                                                    <th>Email Confirmed</th>
+                                                    <th>Roles</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var user in Model.Users)
+                                                {
+                                                <tr>
+                                                    <td><a href="@Url.Action("EditUser",new { user.Id })" class="btn bth-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> @user.Email</a></td>
+                                                    <td>@user.EmailConfirmed</td>
+                                                    <td><b>@string.Join(", ", await @UserManager.GetRolesAsync(user))</b></td>
+                                                    <td>
+                                                        <div class="bt-group">
+                                                            <a href="@Url.Action("ResetPassword",new { user.Id })" class="btn bth-xs btn-default"><i class="glyphicon glyphicon-lock"></i> Reset Password</a>
+                                                            <a href="#" class="btn bth-xs btn-danger js-delete" data-user-id=@user.Id data-user-email=@user.Email><i class="glyphicon glyphicon-remove"></i> Delete</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </section>
+                            </div>
+                        </div>*@
+
+                    <table id="users" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Email Confirmed</th>
+                                <th>Roles</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            var table = $("#users").DataTable({
+                ajax: {
+                    url: "/api/user",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "email",
+                        render: function (data, type, user) {
+                            return "<a href='/admin/user/edituser?id=" + user.id + "' class='btn bth-xs btn-primary'><i class='glyphicon glyphicon-edit'></i> " + user.email + "</a>";
+                        }
+                    },
+                    {
+                        data: "emailConfirmed"
+                    },
+                    {
+                        data: "roles",
+                        render: function (data, type, user) {
+                            return "<b>" + data + "</b>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, user) {
+                            return "<a href='/admin/user/resetpassword?Id=" + data + "' class='btn bth-xs btn-default'><i class='glyphicon glyphicon-lock'></i> Reset Password</a> " +
+                                   "<button class='btn bth-xs btn-danger js-delete' data-user-id=" + data + " data-user-email=" + user.email + "><i class='glyphicon glyphicon-trash'></i> Delete</button>";
+
+                        }
+                    }
+                ]
+            });
+            $("#users").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox
+                    .confirm("Are you sure you want to delete this user : " + button.attr("data-user-email") + "?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/user/" + button.attr("data-user-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    })
+                .css({
+                    'font-weight': 'bold',
+                    'margin-top': function () {
+                        var w = $(window).height();
+                        var b = $(".modal-dialog").height();
+                        // should not be (w-h)/2
+                        var h = (w - b) / 2;
+                        return h + "px";
+                    }
+                });
+            });
+            $("#authUser").on("click", ".js-delete", function () {
+                var link = $(this);
+                bootbox
+                    .confirm("Are you sure you want to delete this user : " + link.attr("data-user-email") + "?", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/user/" + link.attr("data-user-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    table.row(link.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    })
+                .css({
+                    'font-weight': 'bold',
+                    'margin-top': function () {
+                        var w = $(window).height();
+                        var b = $(".modal-dialog").height();
+                        // should not be (w-h)/2
+                        var h = (w - b) / 2;
+                        return h + "px";
+                    }
+                });
+            });
+        });
+    </script>
+}

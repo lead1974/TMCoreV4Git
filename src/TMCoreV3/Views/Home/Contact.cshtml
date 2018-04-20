@@ -1,0 +1,118 @@
+﻿@model TMCoreV3.ViewModels.CustomerViewModels.ContactViewModel
+@using TMCoreV3.DataAccess.Models.Customer
+@using TMCoreV3.Services
+@using Kendo.Mvc.UI;
+
+@{
+    ViewData["Title"] = "Contact Us";
+}
+<h2>Contact Us</h2>
+<form asp-controller="Home" asp-action="Contact" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" asp-antiforgery="true" id="ContactForm" data-role="validator">
+
+    <div class="row">
+
+        <div class="col-md-5">
+            <h4><strong>Get in Touch</strong></h4>
+            <div asp-validation-summary="All" class="alert-danger"></div>
+            @if (ViewBag.UserMessage != null)
+            {
+                <div class="alert-success">@ViewBag.UserMessage</div>
+            }
+            <div class="form-group">
+                <input asp-for="Name" type="text" class="form-control" placeholder="Name" />
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="E-mail" asp-for="Email" />
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control" placeholder="Phone" asp-for="Phone" />
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="13" placeholder="Message" asp-for="Message"></textarea>
+            </div>
+            <button class="btn btn-default" type="submit" name="button">
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
+            </button>
+        </div>
+        <div class="col-md-7">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.9289155912475!2d-117.91449898448464!3d33.78833378067859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcd7f060d83f7d%3A0x386de1a2af7ca1da!2s12664+Chapman+Ave+%231113%2C+Garden+Grove%2C+CA+92840!5e0!3m2!1sen!2sus!4v1523215430473" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</form>
+<br />
+
+<hr />
+<div class="col-lg-12">
+    <h1 class="page-header">List of Contacts</h1>
+    @(Html.Kendo().Grid<TMCoreV3.DataAccess.Models.Customer.Contact>()
+              .Name("contactgrid")
+              .Columns(columns =>
+              {
+                  //columns.Bound(p => p.FirstName).ClientTemplate("<a href='" + @Url.Action("About", "Home") + "/#=CustomerId#'>View</a>");
+                  columns.Bound(p => p.ContactId).Title("Id");
+                  columns.Bound(p => p.Name);
+                  columns.Bound(p => p.Phone).EditorTemplateName("Number").Format("(999) 000-0000");
+                  columns.Bound(p => p.Email);
+                  columns.Bound(p => p.Message);
+                  columns.Bound(p => p.DateCreated).Format("{0:M/d/yyyy HH:mm:ss}").EditorTemplateName("DateTime").Title("Date Created");
+                  columns.Command(command =>
+                  {
+                      command.Edit();
+                      //command.Destroy();
+                      //command.Custom("Action Name").Click("customAction");
+                  }).Width(250); //
+              })
+              .ToolBar(tools =>
+              {
+                  //tools.Create();
+                  tools.Excel();
+              })
+              .Editable(editable => editable.Mode(GridEditMode.InLine)) //.TemplateName("Customer"))
+              .Sortable()
+              //.Scrollable()
+              //.Groupable()
+              .Pageable()
+              .Filterable()
+              .DataSource(dataSource =>
+                  dataSource
+                    .Ajax()
+                    .ServerOperation(false)
+                    .PageSize(50)
+                    .Model(model =>
+                    {
+                        model.Id(p => p.ContactId);
+                        model.Field(p => p.ContactId).Editable(false);
+                        model.Field(p => p.Name).Editable(true);
+                        model.Field(p => p.Phone).Editable(true);
+                        model.Field(p => p.Email).Editable(true);
+                        model.Field(p => p.Message).Editable(false);
+                        model.Field(p => p.DateCreated).Editable(false);
+                    })
+                .Events(events => events.Error("error_handler"))
+                .Create(update => update.Action("ContactEditingPopup_Post", "Home"))
+                .Read(read => read.Action("ContactEditingPopup_Read", "Home"))
+                .Update(update => update.Action("ContactEditingPopup_Put", "Home"))
+                .Destroy(update => update.Action("ContactEditingPopup_Destroy", "Home"))
+          )
+    )
+</div>
+
+
+@section scripts
+        {
+    <script>
+            function error_handler(e) {
+                //var errors = $.parseJSON(e.xhr.responseText);
+                //if (errors) {
+                //    console.log(errors);
+                //}
+            }
+
+            $(document).ready(function () {
+                $("#Phone").kendoMaskedTextBox({
+                    mask: "(999) 000-0000"
+                });
+            });
+    </script>
+}
+

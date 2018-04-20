@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TMCoreV3.ViewModels
+@using TMCoreV3.DataAccess.Models.User
+
+@inject SignInManager<AuthUser> SignInManager
+@inject UserManager<AuthUser> UserManager
+
+<div class="container">
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+        <div class="nav navbar-nav navbar-right">
+            <div class="dropdown" style="color:#fff;background:none;">
+                <a style="color:#fff;background:none;" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i> @UserManager.GetUserName(User)!
+                </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"><i class="fa fa-user fa-fw"></i> My account</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="@Url.Action("LogOff","Account", new { area = "" })"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+           </div>
+        </div>
+    </form>
+}
+else
+{
+        <ul class="nav navbar-nav navbar-right" >
+            @*<li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>*@
+            <li><a asp-area="" asp-controller="Account" asp-action="Login" style="color:#fff;background:none;">Login</a></li>
+            <li><a asp-area="" asp-controller="Account" asp-action="Register" style="color:#fff;background:none;">Register</a></li>
+        </ul>
+    }
+</div>    

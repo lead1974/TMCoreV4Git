@@ -1,0 +1,292 @@
+﻿@model TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@using TMCoreV3.DataAccess.Models.Customer
+
+@inject SignInManager<AuthUser> SignInManager
+
+
+@using Kendo.Mvc.UI;
+
+@{
+    ViewData["Title"] = "Schedule Appointment";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Schedule Appointment</h3>
+                </div>
+                <div class="panel-body">
+                    <section>
+                            <form asp-controller="ScheduleAppointment" asp-action="index" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" asp-antiforgery="true" id="scheduleForm" data-role="validator">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="FirstName" class="form-control" required="required" validationMessage="First Name is required"/>
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="LastName" class="form-control" required="required" validationMessage="Last Name is required"/>
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="Email" class="form-control" required="required" type="email" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PhoneNumber" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="PhoneNumber" class="form-control" validationMessage="Phone number is required" required="required" />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Address" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="Address" class="form-control" required="required" />
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="City" class="col-md-2 control-label"></label>
+                                    <div class="col-md-6">
+                                        <input asp-for="City" class="form-control" required="required" />
+                                        <span asp-validation-for="City" class="text-danger"></span>
+                                    </div>
+                                    <label asp-for="State" class="col-md-2 control-label"></label>
+                                    <div class="col-md-2">
+                                        @(Html.Kendo().DropDownListFor(model => model.State)
+                                        //.Name("ddlStates") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+                                        .DataTextField("StateName") //Specify which property of the Product to be used by the DropDownList as a text.
+                                        .DataValueField("StateId") //Specify which property of the Product to be used by the DropDownList as a value.
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetStates", "ScheduleAppointment"); //Set the Action and Controller names.
+                                            })
+                                            .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                                        })
+                                        .HtmlAttributes(new { style = "width:100%", required = "required"})
+                                        .SelectedIndex(0) //Select the first item.
+                                        )
+                                        @*<input asp-for="State" class="form-control" />*@
+                                        <span asp-validation-for="State" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="PostalCode" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="PostalCode" class="form-control" required="required" validationMessage="ZipCode is required" />
+                                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CustomerApplianceTypeId" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10"  disabled = "disabled">
+                                        @(Html.Kendo().DropDownListFor(model => model.CustomerApplianceTypeId)
+                                        //.Name("ddlCustomerApplianceType") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+                                        .OptionLabel("Select Appliance Type")
+                                        .DataTextField("Name") //Specify which property of the Product to be used by the DropDownList as a text.
+                                        .DataValueField("CustomerApplianceTypeId") //Specify which property of the Product to be used by the DropDownList as a value.
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetCustomerApplianceTypes", "ScheduleAppointment"); //Set the Action and Controller names.
+                                            })
+                                            .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                                        })
+
+                                        .HtmlAttributes(new { style = "width:100%", required = "required", validationMessage = "Appliance Type is required" })
+                                        .SelectedIndex(0) //Select the first item.
+                                        )
+                                        @*<input asp-for="CustomerApplianceTypeId" class="form-control" />*@
+                                        <span asp-validation-for="CustomerApplianceTypeId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="CustomerApplianceBrandId" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        @(Html.Kendo().DropDownListFor(model => model.CustomerApplianceBrandId)
+                                        //.Name("ddlCustomerApplianceBrand") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+                                        .OptionLabel("Select Appliance Brand")
+                                        .DataTextField("Name") //Specify which property of the Product to be used by the DropDownList as a text.
+                                        .DataValueField("CustomerApplianceBrandId") //Specify which property of the Product to be used by the DropDownList as a value.
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetCustomerApplianceBrands", "ScheduleAppointment").Data("filterCustomerApplianceBrands"); //Set the Action and Controller names.
+                                            })
+                                            .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                                        })
+                                        .Enable(false)
+                                        .AutoBind(false)
+                                        .CascadeFrom("CustomerApplianceTypeId")
+                                        .HtmlAttributes(new { style = "width:100%", required = "required", validationMessage = "Appliance Brand is required" })
+                                        .SelectedIndex(0) //Select the first item.
+                                        )
+                                        @*<input asp-for="CustomerApplianceBrandId" class="form-control" />*@
+                                        <span asp-validation-for="CustomerApplianceBrandId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ModelNumber" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="ModelNumber" class="form-control" />
+                                        <span asp-validation-for="ModelNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ModelSerial" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="ModelSerial" class="form-control" />
+                                        <span asp-validation-for="ModelSerial" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DesiredScheduleTime" class="col-md-2 control-label" required="required"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="DesiredScheduleTime" id="datepicker" style="width: 100%;" validationMessage="Schedule Date is required" />
+                                        @*<input asp-for="DesiredScheduleTime" class="form-control focusedInput" />*@
+                                        <span asp-validation-for="DesiredScheduleTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Problem" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <textarea name="Problem" id="problemEditor"
+                                                  rows="5" cols="20"
+                                                  data-val-required="The Problem entry is required"
+                                                  data-val-maxlength-max="5000"
+                                                  validationMessage="Brief problem description is required"></textarea>
+                                        <span asp-validation-for="Problem" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block"><i class="glyphicon  glyphicon-bell"></i> Schedule Appointment</button>
+                                    </div>
+                                </div>
+                            </form>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        //function save(e) {
+        //    var validator = $("#scheduleForm").data("kendoValidator");
+        //    if (validator.validate()) {
+        //        alert("Schedule is saved and sent to assignment");
+        //    }
+        //}
+
+        function filterCustomerApplianceBrands() {
+            return {
+                CustomerApplianceTypes: $("#CustomerApplianceBrandId").val()
+            };
+
+        }
+        $(document).ready(function () {
+
+            //Kendo Masking
+            $("#PhoneNumber").kendoMaskedTextBox({
+                mask: "(999) 000-0000"
+            });
+
+            $("#PostalCode").kendoMaskedTextBox({
+                mask: "00000"
+            });
+
+            // create DateTimePicker from input HTML element
+            $("#datepicker").kendoDatePicker({
+                value: new Date()
+            });
+
+            function filterCustomerApplianceBrands() {
+                return {
+                    CustomerApplianceTypes: $("#CustomerApplianceTypeId").val()
+                };
+            }
+
+            $("#problemEditor").kendoEditor({
+                deserialization: {
+                    custom: function (html) {
+                        return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+                    }
+                }
+            });
+
+        });
+    </script>
+
+<script type="text/javascript">
+    $(function () {
+        var container = $("#scheduleForm");
+        kendo.init(container);
+        container.kendoValidator({
+            rules: {
+                validmask: function (input) {
+                    console.log(input);
+                    if (input.is("[data-validmask-msg]") && input.val() != "") {
+                        var maskedtextbox = input.data("kendoMaskedTextBox");
+                        return maskedtextbox.value().indexOf(maskedtextbox.options.promptChar) === -1;
+                    }
+
+                    return true;
+                }
+            }
+        });
+    });
+
+                //$(function () {
+                //    var container = $("#scheduleForm");
+                //    kendo.init(container);
+                //    container.kendoValidator({
+                //        rules: {
+                //            greaterdate: function (input) {
+                //                if (input.is("[data-greaterdate-msg]") && input.val() != "") {
+                //                    var date = kendo.parseDate(input.val()),
+                //                        otherDate = kendo.parseDate($("[name='" + input.data("greaterdateField") + "']").val());
+                //                    return otherDate == null || otherDate.getTime() < date.getTime();
+                //                }
+
+                //                return true;
+                //            }
+                //        }
+                //    });
+                //});
+
+
+
+</script>  
+}
+<style>
+    span.k-tooltip {
+        margin-top: 5px;
+        line-height: 1.7em;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+    }
+</style>

@@ -1,0 +1,102 @@
+﻿@model TMCoreV3.Areas.Admin.ViewModels.Role.RoleEdit
+@using Microsoft.AspNetCore.Identity
+@using TMCoreV3.Areas.Admin.ViewModels
+@using TMCoreV3.DataAccess.Models.User
+@using Kendo.Mvc.UI;
+
+@inject SignInManager<AuthUser> SignInManager
+@inject UserManager<AuthUser> UserManager
+@inject RoleManager<AuthRole> RoleManager
+
+@{
+    ViewData["Title"] = "Role Maintenance";
+}
+
+<div class="col-lg-12">
+    <h1 class="page-header">Roles</h1>
+    <div class="btn-toolbar">
+        @*<a asp-action="NewRole" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i> Create Role</a>*@
+    </div>
+    <h4 />
+    @(Html.Kendo().Grid<TMCoreV3.Areas.Admin.ViewModels.Role.RoleEdit>()
+      .Name("rolegrid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.Id).ClientTemplate(
+              "<button class='btn bth-xs btn-danger js-delete' data-role-id=#=Id# data-role-name=#=Name#><i class='glyphicon glyphicon-trash'></i> Remove</button>"
+              ).Title("Actions");
+          columns.Bound(p => p.Name);
+          columns.Bound(p => p.Description);
+          columns.Command(command =>
+          {
+              command.Edit();
+              command.Destroy();
+          });
+      })
+      .ToolBar(tools =>
+      {
+          tools.Create().Text("<i class='glyphicon glyphicon - plus'></i> Create Role");
+          tools.Excel();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Sortable()
+      .Scrollable()
+      .Pageable()
+      .Filterable()
+      .DataSource(dataSource =>
+          dataSource
+            .Ajax()
+            .PageSize(20)
+            .Model(model =>
+            {
+                model.Id(p => p.Id);
+            })
+            .Events(events => events.Error("error_handler"))
+            .Read(read => read.Action("EditingPopup_Read", "Role"))
+            .Create(update => update.Action("EditingPopup_Create", "Role"))
+            .Update(update => update.Action("EditingPopup_Update", "Role"))
+            .Destroy(update => update.Action("EditingPopup_Destroy", "Role"))
+      )
+    )
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#rolegrid").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox
+                    .confirm("Are you sure you want to remove this role : " + button.attr("data-role-name") + "? It will remove this Role from all users assigned to this Role!!!", function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/role/" + button.attr("data-role-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    button.parent().parent().remove();
+                                    //table.row(button.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    })
+                .css({
+                    'font-weight': 'bold',
+                    'margin-top': function () {
+                        var w = $(window).height();
+                        var b = $(".modal-dialog").height();
+                        // should not be (w-h)/2
+                        var h = (w - b) / 2;
+                        return h + "px";
+                    }
+                });
+            });
+        });
+
+        function error_handler(e) {
+            var errors = $.parseJSON(e.xhr.responseText);
+            if (errors) {
+                console.log(errors);
+                //alert("Errors: <br/>" + errors.join("<br/>"));
+            }
+        }
+    </script>
+}

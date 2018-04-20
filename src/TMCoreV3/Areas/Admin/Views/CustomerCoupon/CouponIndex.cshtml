@@ -1,0 +1,75 @@
+﻿@model TMCoreV3.DataAccess.Models.Customer.CustomerCoupon
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@using TMCoreV3.DataAccess.Models.Customer
+@inject SignInManager<AuthUser> SignInManager
+
+@{
+    ViewData["Title"] = "Coupons";
+}
+
+<div class="col-lg-12">
+    <h2 class="page-header">Coupons</h2>
+    <h4 />
+    @(Html.Kendo().Grid<TMCoreV3.DataAccess.Models.Customer.CustomerCoupon>()
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  //columns.Bound(p => p.FirstName).ClientTemplate("<a href='" + @Url.Action("About", "Home") + "/#=CustomerId#'>View</a>");
+                  columns.Bound(p => p.Name);
+                  columns.Bound(p => p.Description);
+                  columns.Bound(p => p.ExpirationDate).Format("{0:d}").EditorTemplateName("Date"); 
+                  columns.Bound(p => p.Sequence).EditorTemplateName("Integer");
+                  columns.Command(command =>
+                  {
+                      command.Edit();
+                      command.Destroy();
+                      //command.Custom("Action Name").Click("customAction");
+                  }).Width(250); //
+              })
+              .ToolBar(tools =>
+              {
+                  tools.Create();
+                  tools.Excel();
+              })
+              .Editable(editable => editable.Mode(GridEditMode.InLine)) //.TemplateName("Customer"))
+              .Sortable()
+              //.Scrollable()
+              //.Groupable()
+              .Pageable()
+              .Filterable()
+              .DataSource(dataSource =>
+                  dataSource
+                    .Ajax()
+                    .ServerOperation(false)
+                    .PageSize(20)
+                    .Model(model =>
+                    {
+                        model.Id(p => p.CustomerCouponId);
+                        model.Field(p => p.Name).Editable(true);
+                        model.Field(p => p.Description).Editable(true);
+                        model.Field(p => p.ExpirationDate).Editable(true);
+                        model.Field(p => p.Sequence).Editable(true);
+                    })
+                .Events(events => events.Error("error_handler"))
+                .Create(update => update.Action("CouponInline_Create", "CustomerCoupon"))
+                .Read(read => read.Action("CouponInline_Read", "CustomerCoupon"))
+                .Update(update => update.Action("CouponInline_Update", "CustomerCoupon"))
+                .Destroy(update => update.Action("CouponInline_Destroy", "CustomerCoupon"))
+          )
+    )
+</div>
+    @section scripts
+{
+        <script>
+            function error_handler(e) {
+                var errors = $.parseJSON(e.xhr.responseText);
+                if (errors) {
+                    console.log(errors);
+                }
+            }
+        </script>
+
+    }

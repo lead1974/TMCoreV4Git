@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TMCoreV3.ViewModels
+@using TMCoreV3.DataAccess.Models.User
+@inject SignInManager<AuthUser> SignInManager
+@inject UserManager<AuthUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div>
+        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" style="color:#fff;background:none;">Hello @UserManager.GetUserName(User)!</a>
+                </li>
+                <li class="dropdown" style="color:#fff;background:none;">
+                    <a style="color:#fff;background:none;" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        @*<li>
+                                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            </li>*@
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("LogOff","Account", new { area = "" })"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+            </ul>
+        </form>
+    </div>
+}
+else
+{
+    <div class="container">
+        <form asp-area="" asp-controller="Account" asp-action="LoginTop" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-inline" asp-antiforgery="true">
+            <div class="form-group">
+                <label class="sr-only">Email address</label>
+                <input name="Email" type="email" class="form-control" placeholder="Enter email">
+                @*@Html.TextBox("Email")*@
+            </div>
+            <div class="form-group">
+                <label name="Password" class="sr-only">Password</label>
+                <input name="Password" type="password" class="form-control" placeholder="Password">
+                @*@Html.TextBox("Password")*@
+            </div>
+            <button type="submit" class="btn btn-default">Sign in</button>
+            <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Register">Register</a><br>
+            @*<ul class="nav navbar-nav navbar-right">
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Sign in</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+                </ul><br/>*@
+            <div>
+                <div class="checkbox">
+                    @Html.CheckBox("RememberMe") Remember Me
+                    @*<label name="RememberMe">
+                            <input name="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>*@
+                    <a asp-area="" asp-controller="Account" asp-action="ForgotPassword" style="color:#fff;background:none;"> Forgot your password?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+@*@if (SignInManager.IsSignedIn(User))
+    {
+        <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                </li>
+                <li>
+                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
+                </li>
+            </ul>
+        </form>
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+            <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        </ul>
+    }*@

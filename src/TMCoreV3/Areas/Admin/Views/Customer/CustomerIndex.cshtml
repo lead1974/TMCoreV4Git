@@ -1,0 +1,120 @@
+﻿@model TMCoreV3.Areas.Admin.ViewModels.Customer.CustomerViewModel.CustomerIndex
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@using TMCoreV3.DataAccess.Models.Customer
+@inject SignInManager<AuthUser> SignInManager
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Posts</h1>
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <a href="@Url.Action("customerform")" class="btn btn-primary" btn-sm"><i class="glyphicon glyphicon-plus"></i> Create Customer </a>
+    </div>
+
+    <div class="btn-group pull-right">
+        @if (Model.Customers.HasPreviousPage)
+        {
+            <a href="@Url.Action("Index", new {page=Model.Customers.PreviousPage})" class="btn btn-primary btn-sm">
+                <i class="glyphicon glyphicon-chevron-left"></i> Previous Page
+            </a>
+
+        }
+        else
+        {
+            <a href="#" class="btn btn-default btn-disabled btn-sm">
+                <i class="glyphicon glyphicon-chevron-left"></i> Previous Page
+            </a>
+
+        }
+
+        @if (Model.Customers.HasNextPage)
+        {
+            <a href="@Url.Action("Index", new {page=Model.Customers.NextPage})" class="btn btn-primary btn-sm">
+                Next Page <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+        else
+        {
+            <a href="#" class="btn btn-default btn-disabled btn-sm">
+                Next Page <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+
+        }
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Appliances</th>
+                <th>Time Scheduled</th>
+                <th>Created Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cust in Model.Customers)
+            {
+                var cls = "";
+                //if (post.Status.Contains("DELETED"))
+                //{
+                //    cls = "danger";
+
+                //}
+                <tr class="@cls">
+                    <td>@cust.CustomerName</td>
+                    <td>@string.Join(", ", cust.Appliances.Select(a => a.ApplianceTypes))</td>
+                    <td>@string.Join(", ", cust.CustomerSchedules.Select(s => s.ScheduleTime))</td>
+                    <td>@cust.DateCreated</td>
+                    <td>
+                        <a href="@Url.Action("edit", new { cust.Id })" class="btn btn-btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> Edit
+                        </a>
+
+                        @*@if (!cust.Status.Contains("DELETED"))
+                        {
+                            <div class="btn-group btn-group-xs">
+                                <a href="#" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-trash"></i> Trash
+                                </a>
+                                <a href="#" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="glyphicon glyphicon-remove"></i> delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-success">
+                                <i class="glyphicon glyphicon-plus-sign"></i> restore
+                            </a>
+                        }*@
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+    <textarea id="editor"></textarea>
+
+</div>
+
+@section scripts
+{
+    <script>
+
+      </script>
+
+ }
+   

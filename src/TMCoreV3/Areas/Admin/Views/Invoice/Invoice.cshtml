@@ -1,0 +1,85 @@
+﻿@model TMCoreV3.DataAccess.Models.Invoice.Invoice
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@inject SignInManager<AuthUser> SignInManager
+
+@{
+    ViewData["Title"] = "Invoice";
+}
+
+<div class="col-lg-12">
+    <h1 class="page-header">Invoice Maintanence</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <section>
+                <form asp-controller="User" asp-route-returnurl="/admin/invoice" method="post" class="form-horizontal">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="FirstName" class="form-control" type="text" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="LastName" class="form-control" type="text" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Phone" class="form-control" type="tel" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Email" class="form-control" type="email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>   
+                    <div class="form-group">
+                        <label asp-for="CustomerAddress" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="CustomerAddress" class="form-control" type="text" />
+                            <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                        </div>
+                    </div>     
+                    <div class="form-group">
+                        <label asp-for="CustomerBlackListed" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="CustomerBlackListed" class="form-control" type="checkbox" />
+                            <span asp-validation-for="CustomerBlackListed" class="text-danger"></span>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label asp-for="WorkNotes" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <textarea name="WorkNotes" id="problemEditor"
+                                      rows="5" cols="20"
+                                      data-val-required="The Work Notes entry is required"
+                                      data-val-maxlength-max="5000"
+                                      validationMessage="Brief work description is required"></textarea>
+                            <span asp-validation-for="WorkNotes" class="text-danger"></span>
+                        </div>
+                    </div>             
+                    <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" value='Create' name='action' class="btn btn-primary"> Create Invoice</button>
+                                <button type="submit" value='Cancel' name='action' class="btn btn-default"> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+

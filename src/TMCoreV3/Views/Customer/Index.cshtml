@@ -1,0 +1,17 @@
+﻿@model IEnumerable<TMCoreV3.ViewModels.CustomerViewModels.CustomerIndex>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<p>
+    Below are a few of the latest posts from some of our explorers.
+</p>
+
+<div class="customer-data">
+    @foreach (var customer in Model)
+    {
+        @Html.Partial("_CusotmerPartial", customer)
+    }
+</div>
+

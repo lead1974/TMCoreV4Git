@@ -1,0 +1,16 @@
+﻿@model TMCoreV3.DataAccess.Models.Invoice.Invoice
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@inject SignInManager<AuthUser> SignInManager
+@{
+    ViewData["Title"] = "Invoice";
+}
+<div class="col-lg-12">
+    <h1 class="page-header">Invoice Maintanence</h1>
+    <div class="btn-toolbar">
+        <a asp-action="NewInvoice" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i> New Invoice</a>
+    </div>
+    <h4 />
+</div>

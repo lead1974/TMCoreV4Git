@@ -1,0 +1,42 @@
+﻿@model TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@using TMCoreV3.DataAccess.Models.Customer
+
+@inject SignInManager<AuthUser> SignInManager
+
+
+@using Kendo.Mvc.UI;
+
+@{
+    ViewData["Title"] = "Appointment Confirmation";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Appointment Confirmation</h3>
+                </div>
+                <div class="panel-body">
+                    <section>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+ }

@@ -1,0 +1,42 @@
+﻿@model TMCoreV3.Areas.Admin.ViewModels.Customer.CustomerViewModel.CustomerForm
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@using TMCoreV3.DataAccess.Models.Customer
+@inject SignInManager<AuthUser> SignInManager
+
+@{
+    ViewData["Title"] = Model.IsNew ? "Create Customer" : "Update Customer";
+}
+
+<div class="col-lg-12">
+    <h1 class="page-header">@(Model.IsNew ? "Create Customer" : "Update Customer")</h1>
+    <div class="row">
+        <section>
+            <form asp-controller="Customer" asp-route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" asp-antiforgery="true" asp-area="admin">
+                <div class="col-lg-8">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input asp-for="Id" type="hidden" />
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="FirstName" class="form-control focus" type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="panel panel-info">
+                            <div class="panel-heading"> Actions</div>
+                            <div class="panel-body">
+                                <button type="submit" value='@(Model.IsNew?"CreateCustomer": "UpdateCustomer")' name='action' class="btn btn-primary">@(Model.IsNew ? "Create Customer" : "Update Customer")</button>
+                                <button type="submit" value='Cancel' name='action' class="btn btn-default"> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,240 @@
+﻿@model TMCoreV3.DataAccess.Models.Invoice.Invoice
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@inject SignInManager<AuthUser> SignInManager
+
+@{
+    ViewData["Title"] = "Invoice";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Invoice Details</h3>
+                </div>
+                <div class="panel-body">
+                    <section>
+                        <form asp-controller="Invoice" asp-action="index" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" asp-antiforgery="true" id="invoiceForm" data-role="validator">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="InvoiceDate" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="InvoiceDate" id="invoicedate" style="width: 100%;" />
+                                    <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+                                </div>
+                                <label asp-for="InvoiceName" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="InvoiceName" class="form-control" required="required" validationMessage="Invoice Name is required" />
+                                    <span asp-validation-for="InvoiceName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PaymentType" class="col-md-2 control-label"></label>
+                                <div class="col-md-6">
+                                    <input asp-for="PaymentType" id="PaymentType" class="form-control">
+                                    <span asp-validation-for="State" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ChargedAmount" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="ChargedAmount" id="ChargedAmount" class="form-control" required="required" validationMessage="Charged Amount is required" />
+                                    <span asp-validation-for="ChargedAmount" class="text-danger"></span>
+                                </div>
+                                <label asp-for="TaxAmount" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="TaxAmount" class="form-control" id="TaxAmount" />
+                                    <span asp-validation-for="TaxAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="FirstName" class="form-control" required="required" validationMessage="First Name is required" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <label asp-for="LastName" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="LastName" class="form-control" required="required" validationMessage="Last Name is required" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="Email" class="form-control" required="required" type="email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <label asp-for="Phone" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="Phone" class="form-control" validationMessage="Phone number is required" required="required" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="Address" class="form-control" required="required" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <label asp-for="City" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="City" class="form-control" required="required" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PostalCode" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="PostalCode" class="form-control" required="required" validationMessage="ZipCode is required" />
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                </div>
+                                <label asp-for="State" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DropDownListFor(model => model.State)
+                                        //.Name("ddlStates") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+                                        .DataTextField("StateName") //Specify which property of the Product to be used by the DropDownList as a text.
+                                        .DataValueField("StateId") //Specify which property of the Product to be used by the DropDownList as a value.
+                                        .DataSource(source =>
+                                        {
+                                            source.Read(read =>
+                                            {
+                                                read.Action("GetStates", "Invoice"); //Set the Action and Controller names.
+                                            })
+                                            .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                                        })
+                                        .HtmlAttributes(new { style = "width:100%", required = "required" })
+                                        .SelectedIndex(0) //Select the first item.
+                                    )
+                                    @*<input asp-for="State" class="form-control" />*@
+                                    <span asp-validation-for="State" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PartsPaid" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="PartsPaid" id="PartsPaid" class="form-control" />
+                                    <span asp-validation-for="PartsPaid" class="text-danger"></span>
+                                </div>
+                                <label asp-for="PartNotes" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="PartNotes" id="PartNotes" class="form-control" />
+                                    <span asp-validation-for="PartNotes" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="WarrantyFromDate" class="col-md-2 control-label" ></label>
+                                <div class="col-md-4">
+                                    <input asp-for="WarrantyFromDate" id="WarrantyFromDate" style="width: 100%;" />
+                                    <span asp-validation-for="WarrantyFromDate" class="text-danger"></span>
+                                </div>
+                                <label asp-for="WarrantyToDate" class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input asp-for="WarrantyToDate" id="WarrantyToDate" style="width: 100%;" />
+                                    <span asp-validation-for="WarrantyToDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="WorkNotes" class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="13" placeholder="Message" asp-for="WorkNotes" name="WorkNotes" id="WorkNotes" data-val-required="The work notes are required" validationMessage="Brief work description is required"></textarea>
+                                    <span asp-validation-for="WorkNotes" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CustomerBlackListed" class="col-md-2 control-label"></label>
+                                <div class="col-sm-1">
+                                    <input asp-for="CustomerBlackListed" class="form-control" type="checkbox"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-4">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="glyphicon  glyphicon-save"></i> Save Invoice</button>
+                                </div>
+                                <div class="col-md-offset-2 col-sm-4">
+                                    <button type="submit" class="btn btn-lg btn-default"><i class="glyphicon  glyphicon-log-out"></i> Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            //Kendo Masking
+            $("#ChargedAmount").kendoMaskedTextBox({
+                mask: "$000,000.00"
+            });
+
+            $("#TaxAmount").kendoMaskedTextBox({
+                mask: "$###,###.##"
+            });
+
+            // create DateTimePicker from input HTML element
+            $("#invoicedate").kendoDatePicker({
+                value: new Date()
+            });
+
+            $("#WarrantyFromDate").kendoDatePicker({
+                value: new Date()
+            });
+
+            $("#WarrantyToDate").kendoDatePicker({
+                value: new Date()
+            });
+
+            $("#WorkNotes").kendoEditor({
+                deserialization: {
+                    custom: function (html) {
+                        return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+                    }
+                }
+            });
+
+            $("#Phone").kendoMaskedTextBox({
+                mask: "(999) 000-0000"
+            });
+
+            $("#PaymentType").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                  { text: "Credit Card", value: "1" },
+                  { text: "Check", value: "2" },
+                  { text: "Cash", value: "3" }                 
+                ]
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+    $(function () {
+        var container = $("#invoiceForm");
+        kendo.init(container);
+        container.kendoValidator({
+            rules: {
+                validmask: function (input) {
+                    console.log(input);
+                    if (input.is("[data-validmask-msg]") && input.val() != "") {
+                        var maskedtextbox = input.data("kendoMaskedTextBox");
+                        return maskedtextbox.value().indexOf(maskedtextbox.options.promptChar) === -1;
+                    }
+
+                    return true;
+                }
+            }
+        });
+    });
+
+    </script>
+}
+
