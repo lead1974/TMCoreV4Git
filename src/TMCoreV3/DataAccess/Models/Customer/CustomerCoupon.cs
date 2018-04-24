@@ -25,7 +25,8 @@ namespace TMCoreV3.DataAccess.Models.Customer
         public string Description { get; set; }
 
         [Display(Name = "Coupon Expiration Date")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? ExpirationDate { get; set; }
         public int Sequence { get; set; }
 

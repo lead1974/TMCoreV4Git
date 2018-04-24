@@ -104,7 +104,7 @@
                                     ${Description}
                                 </p>
                                 <p class="group inner list-group-item-text">
-                                    Expired on: ${ExpirationDate}
+                                    Expired on: #=kendo.toString(kendo.parseDate(ExpirationDate), 'MM/dd/yyyy')# 
                                 </p>
                             </div>
                         </a>

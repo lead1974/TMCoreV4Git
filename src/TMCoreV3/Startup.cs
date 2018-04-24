@@ -108,6 +108,7 @@ namespace TMCoreV3
             {
                 config.CreateMap<CustomerForm, Customer>().ReverseMap();
                 config.CreateMap<ContactViewModel, Contact>().ReverseMap();
+                config.CreateMap<ScheduleAppointment, Customer>().ReverseMap();
             });
 
 

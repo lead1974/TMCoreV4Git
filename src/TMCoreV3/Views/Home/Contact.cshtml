@@ -13,22 +13,26 @@
 
         <div class="col-md-5">
             <h4><strong>Get in Touch</strong></h4>
-            <div asp-validation-summary="All" class="alert-danger"></div>
             @if (ViewBag.UserMessage != null)
             {
                 <div class="alert-success">@ViewBag.UserMessage</div>
             }
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <input asp-for="Name" type="text" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="E-mail" asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="tel" class="form-control" placeholder="Phone" asp-for="Phone" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <textarea class="form-control" rows="13" placeholder="Message" asp-for="Message"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <button class="btn btn-default" type="submit" name="button">
                 <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
@@ -113,6 +117,25 @@
                     mask: "(999) 000-0000"
                 });
             });
+
+            $(function () {
+                var container = $("#ContactForm");
+                kendo.init(container);
+                container.kendoValidator({
+                    rules: {
+                        validmask: function (input) {
+                            console.log(input);
+                            if (input.is("[data-validmask-msg]") && input.val() != "") {
+                                var maskedtextbox = input.data("kendoMaskedTextBox");
+                                return maskedtextbox.value().indexOf(maskedtextbox.options.promptChar) === -1;
+                            }
+
+                            return true;
+                        }
+                    }
+                });
+            });
+
     </script>
 }
 

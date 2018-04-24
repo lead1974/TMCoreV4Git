@@ -245,7 +245,7 @@
                 </div>
             </nav>
         </header>
-        <!-- /.search form -->
+        <!-- /.search form --> 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
@@ -262,6 +262,19 @@
                         <ul class="treeview-menu">
                             <li>
                                 <a href="@Url.Action("InvoiceIndex","Invoice")"><i class="fa fa-circle-o"></i> Invoices</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active treeview">
+                        <a href="#">
+                            <i class="fa fa-book"></i> <span> Schedule Maintenance </span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="@Url.Action("CustomerScheduleIndex","CustomerSchedule")"><i class="fa fa-circle-o"></i> Schedules</a>
                             </li>
                         </ul>
                     </li>

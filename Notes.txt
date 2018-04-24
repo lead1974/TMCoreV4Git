@@ -1,1 +1,9 @@
 1. To update database run this command:dotnet ef database update
+2. Setup Git as new repostiry:
+   a. Open Command Prompt
+   b. remove current git files: C:\Andrey\WebApps\TMCoreV3Git>rd .git /S/Q
+   c. initiate git : C:\Andrey\WebApps\TMCoreV3Git>git init
+   d. add everything to local repository: C:\Andrey\WebApps\TMCoreV3Git>git add .
+   e. commit all first time: C:\Andrey\WebApps\TMCoreV3Git>git commit -m "My First Commit"
+   f. sync with remote git repository: C:\Andrey\WebApps\TMCoreV3Git>git remote add origin https://github.com/lead1974/TMCoreV4Git.git
+   g. push an existing local repository to remote repository: git push -u origin master

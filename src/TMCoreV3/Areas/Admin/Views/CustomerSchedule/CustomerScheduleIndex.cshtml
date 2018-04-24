@@ -1,0 +1,71 @@
+﻿@model TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using TMCoreV3.DataAccess.Models.User
+@inject SignInManager<AuthUser> SignInManager
+@{
+    ViewData["Title"] = "Schedules";
+}
+<div class="col-lg-12">
+    <h2 class="page-header">Coupons</h2>
+    <h4 />
+    @(Html.Kendo().Grid<TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment>()
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  //columns.Bound(p => p.FirstName).ClientTemplate("<a href='" + @Url.Action("About", "Home") + "/#=CustomerId#'>View</a>");
+                  columns.Bound(p => p.FirstName);
+                  columns.Bound(p => p.LastName);
+                  columns.Bound(p => p.PhoneNumber).EditorTemplateName("Integer");
+                  columns.Bound(p => p.DesiredScheduleTime).Format("{0:d}").EditorTemplateName("Date");                  
+                  columns.Command(command =>
+                  {
+                      command.Edit();
+                      command.Destroy();
+                      //command.Custom("Action Name").Click("customAction");
+                  }).Width(250); //
+              })
+              .ToolBar(tools =>
+              {
+                  //tools.Create();
+                  tools.Excel();
+              })
+              .Editable(editable => editable.Mode(GridEditMode.InLine)) //.TemplateName("Customer"))
+              .Sortable()
+              //.Scrollable()
+              //.Groupable()
+              .Pageable()
+              .Filterable()
+              .DataSource(dataSource =>
+                  dataSource
+                    .Ajax()
+                    .ServerOperation(false)
+                    .PageSize(20)
+                    .Model(model =>
+                    {
+                        model.Id(p => p.CustomerId);
+                        model.Field(p => p.FirstName).Editable(true);
+                        model.Field(p => p.LastName).Editable(true);
+                        model.Field(p => p.PhoneNumber).Editable(true);
+                        model.Field(p => p.DesiredScheduleTime).Editable(true);
+                    })
+                .Events(events => events.Error("error_handler"))
+                //.Create(update => update.Action("ScheduleInline_Create", "Schedule"))
+                .Read(read => read.Action("ScheduleInline_Read", "Schedule"))
+                .Update(update => update.Action("ScheduleInline_Update", "Schedule"))
+                .Destroy(update => update.Action("ScheduleInline_Destroy", "Schedule"))
+          )
+    )
+</div>
+@section scripts
+{
+    <script>
+            function error_handler(e) {
+                //var errors = $.parseJSON(e.xhr.responseText);
+                //if (errors) {
+                //    console.log(errors);
+                //}
+            }
+    </script>
+}

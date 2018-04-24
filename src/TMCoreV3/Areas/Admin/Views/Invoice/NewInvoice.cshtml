@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label asp-for="ChargedAmount" class="col-md-2 control-label"></label>
                                 <div class="col-md-4">
-                                    <input asp-for="ChargedAmount" id="ChargedAmount" class="form-control" required="required" validationMessage="Charged Amount is required" />
+                                    <input asp-for="ChargedAmount" id="ChargedAmount" class="form-control" required="required" validationMessage="Charged Amount is required"/>
                                     <span asp-validation-for="ChargedAmount" class="text-danger"></span>
                                 </div>
                                 <label asp-for="TaxAmount" class="col-md-2 control-label"></label>
@@ -156,7 +156,7 @@
                                     <button type="submit" class="btn btn-lg btn-primary btn-block"><i class="glyphicon  glyphicon-save"></i> Save Invoice</button>
                                 </div>
                                 <div class="col-md-offset-2 col-sm-4">
-                                    <button type="submit" class="btn btn-lg btn-default"><i class="glyphicon  glyphicon-log-out"></i> Cancel</button>
+                                    <a href="@Url.Action("InvoiceIndex","Invoice")" class="btn btn-lg btn-default"><i class="glyphicon  glyphicon-log-out" formnovalidate></i> Cancel</a>
                                 </div>
                             </div>
                         </form>
