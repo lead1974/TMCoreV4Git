@@ -1,7 +1,7 @@
-﻿@model TMCoreV3.Areas.Admin.ViewModels.Role.RoleEdit
+﻿@model TMWork.Areas.Admin.ViewModels.Role.RoleEdit
 @using Microsoft.AspNetCore.Identity
-@using TMCoreV3.Areas.Admin.ViewModels
-@using TMCoreV3.DataAccess.Models.User
+@using TMWork.Areas.Admin.ViewModels
+@using TMWork.DataAccess.Models.User
 @using Kendo.Mvc.UI;
 
 @inject SignInManager<AuthUser> SignInManager
@@ -18,7 +18,7 @@
         @*<a asp-action="NewRole" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-plus"></i> Create Role</a>*@
     </div>
     <h4 />
-    @(Html.Kendo().Grid<TMCoreV3.Areas.Admin.ViewModels.Role.RoleEdit>()
+    @(Html.Kendo().Grid<TMWork.Areas.Admin.ViewModels.Role.RoleEdit>()
       .Name("rolegrid")
       .Columns(columns =>
       {

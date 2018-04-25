@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TMCoreV3.DataAccess.Models.Customer;
-using TMCoreV3.ViewModels.CustomerViewModels;
-using TMCoreV3.DataAccess.Repos;
+using TMWork.DataAccess.Models.Customer;
+using TMWork.ViewModels.CustomerViewModels;
+using TMWork.DataAccess.Repos;
 
-namespace TMCoreV3.Controllers
+namespace TMWork.Controllers
 {
     [Route("customer")]
     public class CustomerController : Controller

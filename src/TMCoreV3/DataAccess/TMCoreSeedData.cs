@@ -1,4 +1,4 @@
-﻿using TMCoreV3.DataAccess.Models.Customer;
+﻿using TMWork.DataAccess.Models.Customer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Repos;
-using TMCoreV3.Services;
+using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Repos;
+using TMWork.Services;
 
-namespace TMCoreV3.DataAccess
+namespace TMWork.DataAccess
 {
     public class TMCoreSeedData
     {

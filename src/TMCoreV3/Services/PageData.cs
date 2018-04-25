@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.Services
+namespace TMWork.Services
 {
     public class PageData<T>:IEnumerable<T>
     {

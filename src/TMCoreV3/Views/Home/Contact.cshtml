@@ -1,6 +1,6 @@
-﻿@model TMCoreV3.ViewModels.CustomerViewModels.ContactViewModel
-@using TMCoreV3.DataAccess.Models.Customer
-@using TMCoreV3.Services
+﻿@model TMWork.ViewModels.CustomerViewModels.ContactViewModel
+@using TMWork.DataAccess.Models.Customer
+@using TMWork.Services
 @using Kendo.Mvc.UI;
 
 @{
@@ -48,7 +48,7 @@
 <hr />
 <div class="col-lg-12">
     <h1 class="page-header">List of Contacts</h1>
-    @(Html.Kendo().Grid<TMCoreV3.DataAccess.Models.Customer.Contact>()
+    @(Html.Kendo().Grid<TMWork.DataAccess.Models.Customer.Contact>()
               .Name("contactgrid")
               .Columns(columns =>
               {

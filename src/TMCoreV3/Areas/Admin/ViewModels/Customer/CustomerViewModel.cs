@@ -1,17 +1,17 @@
-﻿using TMCoreV3.DataAccess.Models.Customer;
-using TMCoreV3.Services;
+﻿using TMWork.DataAccess.Models.Customer;
+using TMWork.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TMCoreV3.Areas.Admin.ViewModels.Customer
+namespace TMWork.Areas.Admin.ViewModels.Customer
 {
     public class CustomerViewModel
     {
 
         public class CustomerIndex
         {
-            public PageData<TMCoreV3.DataAccess.Models.Customer.Customer> Customers { get; set; }
+            public PageData<TMWork.DataAccess.Models.Customer.Customer> Customers { get; set; }
         }
 
         public class CustomerForm

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.DataAccess.Models.Invoice
+namespace TMWork.DataAccess.Models.Invoice
 {
     public class FileUpload
     {

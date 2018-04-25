@@ -1,6 +1,6 @@
-﻿using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Repos;
-using TMCoreV3.Services;
+﻿using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Repos;
+using TMWork.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using AutoMapper;
 
-namespace TMCoreV3.Areas.Admin.Controllers.Customer
+namespace TMWork.Areas.Admin.Controllers.Customer
 {
     [Area("Admin")]
     [Route("admin/[controller]")]
@@ -64,11 +64,11 @@ namespace TMCoreV3.Areas.Admin.Controllers.Customer
         }
 
         [HttpPost, Route("ScheduleInline_Update")]
-        public IActionResult ScheduleInline_Update([DataSourceRequest] DataSourceRequest request, TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment theSchedule)
+        public IActionResult ScheduleInline_Update([DataSourceRequest] DataSourceRequest request, TMWork.ViewModels.CustomerViewModels.ScheduleAppointment theSchedule)
         {
             if (theSchedule != null && ModelState.IsValid)
             {
-                var customer = Mapper.Map<TMCoreV3.DataAccess.Models.Customer.Customer>(theSchedule);
+                var customer = Mapper.Map<TMWork.DataAccess.Models.Customer.Customer>(theSchedule);
 
                 customer.UpdatedBy = User.Identity.Name;
                 customer.DateUpdated = DateTime.UtcNow;
@@ -82,11 +82,11 @@ namespace TMCoreV3.Areas.Admin.Controllers.Customer
         }
 
         [HttpPost, Route("ScheduleInline_Destroy")]
-        public IActionResult ScheduleInline_Destroy([DataSourceRequest] DataSourceRequest request, TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment theSchedule)
+        public IActionResult ScheduleInline_Destroy([DataSourceRequest] DataSourceRequest request, TMWork.ViewModels.CustomerViewModels.ScheduleAppointment theSchedule)
         {
             if (theSchedule != null)
             {
-                var customer = Mapper.Map<TMCoreV3.DataAccess.Models.Customer.Customer>(theSchedule);
+                var customer = Mapper.Map<TMWork.DataAccess.Models.Customer.Customer>(theSchedule);
 
                 _customerRepo.Remove(customer);
                 _customerRepo.SaveAll();

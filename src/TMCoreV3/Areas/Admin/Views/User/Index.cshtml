@@ -1,8 +1,8 @@
-﻿@model TMCoreV3.Areas.Admin.ViewModels.User.UserIndex
+﻿@model TMWork.Areas.Admin.ViewModels.User.UserIndex
 
 @using Microsoft.AspNetCore.Identity
-@using TMCoreV3.Areas.Admin.ViewModels
-@using TMCoreV3.DataAccess.Models.User
+@using TMWork.Areas.Admin.ViewModels
+@using TMWork.DataAccess.Models.User
 @using Kendo.Mvc.UI;
 
 @inject SignInManager<AuthUser> SignInManager
@@ -20,7 +20,7 @@
     </div>
     <h4 />
 
-    @(Html.Kendo().Grid<TMCoreV3.Areas.Admin.ViewModels.User.UserJquery>()
+    @(Html.Kendo().Grid<TMWork.Areas.Admin.ViewModels.User.UserJquery>()
       .Name("grid")
       .Columns(columns =>
       {

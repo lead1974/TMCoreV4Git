@@ -1,6 +1,6 @@
-﻿using TMCoreV3.DataAccess.Models.Customer;
-using TMCoreV3.Services;
-using TMCoreV3.ViewModels.AccountViewModels;
+﻿using TMWork.DataAccess.Models.Customer;
+using TMWork.Services;
+using TMWork.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace TMCoreV3.ViewModels.CustomerViewModels
+namespace TMWork.ViewModels.CustomerViewModels
 {
     public class CustomerIndex
     {

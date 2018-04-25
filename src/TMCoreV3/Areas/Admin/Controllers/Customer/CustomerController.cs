@@ -1,7 +1,7 @@
-﻿using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Repos;
-using TMCoreV3.Services;
+﻿using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Repos;
+using TMWork.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +11,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static TMCoreV3.Areas.Admin.ViewModels.Customer.CustomerViewModel;
+using static TMWork.Areas.Admin.ViewModels.Customer.CustomerViewModel;
 
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using TMCoreV3.DataAccess.Models.Customer;
+using TMWork.DataAccess.Models.Customer;
 
-namespace TMCoreV3.Areas.Admin.Controllers.Customer
+namespace TMWork.Areas.Admin.Controllers.Customer
 {
     [Area("Admin")]
     [Route("admin/[controller]")]
@@ -72,7 +72,7 @@ namespace TMCoreV3.Areas.Admin.Controllers.Customer
 
             return View(new CustomerIndex
             {
-                Customers = new PageData<TMCoreV3.DataAccess.Models.Customer.Customer>(currentCustomerPage, totalPostCount, page, PostsPerPage)
+                Customers = new PageData<TMWork.DataAccess.Models.Customer.Customer>(currentCustomerPage, totalPostCount, page, PostsPerPage)
             });
         }
 
@@ -94,10 +94,10 @@ namespace TMCoreV3.Areas.Admin.Controllers.Customer
                 form.IsNew = _globalService.IsNullOrDefault(form.Id);
                 if (!ModelState.IsValid) return View(form);
 
-                TMCoreV3.DataAccess.Models.Customer.Customer customer;
+                TMWork.DataAccess.Models.Customer.Customer customer;
                 if (form.IsNew)
                 {
-                    customer = new TMCoreV3.DataAccess.Models.Customer.Customer
+                    customer = new TMWork.DataAccess.Models.Customer.Customer
                     {
                         DateCreated = DateTime.UtcNow,
                         CreatedBy = User.Identity.Name,

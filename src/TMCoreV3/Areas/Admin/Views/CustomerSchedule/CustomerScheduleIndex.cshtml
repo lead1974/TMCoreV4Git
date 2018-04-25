@@ -1,8 +1,8 @@
-﻿@model TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment
+﻿@model TMWork.ViewModels.CustomerViewModels.ScheduleAppointment
 @using System.Collections.Generic
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
-@using TMCoreV3.DataAccess.Models.User
+@using TMWork.DataAccess.Models.User
 @inject SignInManager<AuthUser> SignInManager
 @{
     ViewData["Title"] = "Schedules";
@@ -10,7 +10,7 @@
 <div class="col-lg-12">
     <h2 class="page-header">Coupons</h2>
     <h4 />
-    @(Html.Kendo().Grid<TMCoreV3.ViewModels.CustomerViewModels.ScheduleAppointment>()
+    @(Html.Kendo().Grid<TMWork.ViewModels.CustomerViewModels.ScheduleAppointment>()
               .Name("grid")
               .Columns(columns =>
               {

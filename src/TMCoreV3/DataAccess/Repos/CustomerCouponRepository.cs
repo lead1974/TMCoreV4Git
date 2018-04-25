@@ -1,5 +1,5 @@
-﻿using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Models.Customer;
+﻿using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Models.Customer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.DataAccess.Repos
+namespace TMWork.DataAccess.Repos
 {
     public class CustomerCouponRepository : ICustomerCouponRepository
     {

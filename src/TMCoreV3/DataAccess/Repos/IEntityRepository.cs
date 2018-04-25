@@ -1,14 +1,14 @@
-﻿using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Models.Customer;
+﻿using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Models.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using TMCoreV3.DataAccess.Models.Invoice;
+using TMWork.DataAccess.Models.Invoice;
 
-namespace TMCoreV3.DataAccess.Repos
+namespace TMWork.DataAccess.Repos
 {
     public interface IEntityRepository<T>
     {

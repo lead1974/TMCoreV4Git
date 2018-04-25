@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.Services
+namespace TMWork.Services
 {
     public interface ISmsService
     {

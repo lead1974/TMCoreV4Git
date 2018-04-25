@@ -3,10 +3,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMCoreV3.DataAccess.Models.Customer;
-using TMCoreV3.DataAccess.Models.User;
+using TMWork.DataAccess.Models.Customer;
+using TMWork.DataAccess.Models.User;
 
-namespace TMCoreV3.DataAccess.Repos
+namespace TMWork.DataAccess.Repos
 {
     public class ContactRepository:IContactRepository
     {

@@ -8,14 +8,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using TMCoreV3.ViewModels;
-using TMCoreV3.ViewModels.AccountViewModels;
-using TMCoreV3.Services;
-using TMCoreV3.DataAccess.Models.User;
+using TMWork.ViewModels;
+using TMWork.ViewModels.AccountViewModels;
+using TMWork.Services;
+using TMWork.DataAccess.Models.User;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Authentication;
 
-namespace TMCoreV3.Controllers
+namespace TMWork.Controllers
 {
     [Authorize]
     public class AccountController : Controller

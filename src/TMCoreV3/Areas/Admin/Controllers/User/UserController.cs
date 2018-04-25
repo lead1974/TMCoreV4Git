@@ -1,7 +1,7 @@
-﻿using TMCoreV3.Areas.Admin.ViewModels.User;
-using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.Services;
+﻿using TMWork.Areas.Admin.ViewModels.User;
+using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
+using TMWork.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using System.Collections.ObjectModel;
 
-namespace TMCoreV3.Areas.Admin.Controllers.User
+namespace TMWork.Areas.Admin.Controllers.User
 {
     [Area("Admin")]    
     [Route("admin/[controller]")]

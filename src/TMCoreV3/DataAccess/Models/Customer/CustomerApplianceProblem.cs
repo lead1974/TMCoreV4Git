@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TMCoreV3.DataAccess.Models.Customer;
+using TMWork.DataAccess.Models.Customer;
 
-namespace TMCoreV3.DataAccess.Models.Customer
+namespace TMWork.DataAccess.Models.Customer
 {
     public class CustomerApplianceProblem
     {

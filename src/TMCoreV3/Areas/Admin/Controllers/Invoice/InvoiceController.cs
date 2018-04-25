@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using TMCoreV3.Services;
+using TMWork.Services;
 using Microsoft.Extensions.Logging;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Models.Customer;
-using TMCoreV3.DataAccess.Repos;
+using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Models.Customer;
+using TMWork.DataAccess.Repos;
 using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TMCoreV3.Areas.Admin.Controllers.Invoice
+namespace TMWork.Areas.Admin.Controllers.Invoice
 {
     [Area("Admin")]
     [Route("admin/[controller]")]

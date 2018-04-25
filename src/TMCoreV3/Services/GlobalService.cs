@@ -1,6 +1,6 @@
-﻿using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.ViewModels.AccountViewModels;
+﻿using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
+using TMWork.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.Services
+namespace TMWork.Services
 {
     public class GlobalService
     {

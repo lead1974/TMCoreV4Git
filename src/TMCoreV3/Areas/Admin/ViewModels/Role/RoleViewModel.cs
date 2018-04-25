@@ -1,5 +1,5 @@
-﻿using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.Services;
+﻿using TMWork.DataAccess.Models.User;
+using TMWork.Services;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.Areas.Admin.ViewModels.Role
+namespace TMWork.Areas.Admin.ViewModels.Role
 {
     public class RoleViewModel
     {

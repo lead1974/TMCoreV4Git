@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.Services
+namespace TMWork.Services
 {
     public static class RoleName
     {

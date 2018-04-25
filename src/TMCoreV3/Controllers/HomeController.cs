@@ -3,20 +3,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.Services;
+using TMWork.DataAccess.Models.User;
+using TMWork.Services;
 using Microsoft.Extensions.Logging;
-using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Repos;
+using TMWork.DataAccess;
+using TMWork.DataAccess.Repos;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using TMCoreV3.ViewModels.CustomerViewModels;
+using TMWork.ViewModels.CustomerViewModels;
 using AutoMapper;
-using TMCoreV3.DataAccess.Models.Customer;
+using TMWork.DataAccess.Models.Customer;
 
-namespace TMCoreV3.Controllers
+namespace TMWork.Controllers
 {
     public class HomeController : Controller
     {

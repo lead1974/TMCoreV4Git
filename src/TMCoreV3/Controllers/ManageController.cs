@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TMCoreV3.ViewModels;
-using TMCoreV3.ViewModels.ManageViewModels;
-using TMCoreV3.Services;
-using TMCoreV3.DataAccess.Models.User;
+using TMWork.ViewModels;
+using TMWork.ViewModels.ManageViewModels;
+using TMWork.Services;
+using TMWork.DataAccess.Models.User;
 
-namespace TMCoreV3.Controllers
+namespace TMWork.Controllers
 {
     [Authorize]
     public class ManageController : Controller

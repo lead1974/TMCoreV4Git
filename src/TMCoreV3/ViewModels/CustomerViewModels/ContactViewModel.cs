@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TMCoreV3.ViewModels.CustomerViewModels
+namespace TMWork.ViewModels.CustomerViewModels
 {
     public class ContactViewModel
     {

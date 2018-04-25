@@ -9,17 +9,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TMCoreV3.Services;
-using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
+using TMWork.Services;
+using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
 using Microsoft.AspNetCore.Http;
-using TMCoreV3.DataAccess.Repos;
+using TMWork.DataAccess.Repos;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
-using TMCoreV3.DataAccess.Models.Customer;
-using TMCoreV3.ViewModels.CustomerViewModels;
+using TMWork.DataAccess.Models.Customer;
+using TMWork.ViewModels.CustomerViewModels;
 
-namespace TMCoreV3
+namespace TMWork
 {
     public class Startup
     {

@@ -3,7 +3,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.Services
+namespace TMWork.Services
 {
     public class MailService : IMailService, ISmsService
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCoreV3.DataAccess.Models.Customer
+namespace TMWork.DataAccess.Models.Customer
 {
     public class Contact
     {

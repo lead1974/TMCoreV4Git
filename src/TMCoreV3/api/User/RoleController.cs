@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
+using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
 using Microsoft.Extensions.Logging;
 
-namespace TMCoreV3.api
+namespace TMWork.api
 {
     [Route("api/[controller]")]
     public class RoleController : Controller

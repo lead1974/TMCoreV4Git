@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TMCoreV3.DataAccess.Repos;
-using TMCoreV3.DataAccess;
-using TMCoreV3.Services;
+using TMWork.DataAccess.Repos;
+using TMWork.DataAccess;
+using TMWork.Services;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using TMCoreV3.ViewModels.CustomerViewModels;
+using TMWork.ViewModels.CustomerViewModels;
 using AutoMapper;
 using System.Net;
 using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TMCoreV3.api.Customer
+namespace TMWork.api.Customer
 {
     [Route("api/[controller]")]
     public class CustomerController : Controller

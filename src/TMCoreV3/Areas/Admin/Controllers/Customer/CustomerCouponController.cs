@@ -1,7 +1,7 @@
-﻿using TMCoreV3.DataAccess;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Repos;
-using TMCoreV3.Services;
+﻿using TMWork.DataAccess;
+using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Repos;
+using TMWork.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +11,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static TMCoreV3.Areas.Admin.ViewModels.Customer.CustomerViewModel;
+using static TMWork.Areas.Admin.ViewModels.Customer.CustomerViewModel;
 
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using TMCoreV3.DataAccess.Models.Customer;
+using TMWork.DataAccess.Models.Customer;
 using AutoMapper;
 
-namespace TMCoreV3.Areas.Admin.Controllers.Customer
+namespace TMWork.Areas.Admin.Controllers.Customer
 {
     [Area("Admin")]
     [Route("admin/[controller]")]

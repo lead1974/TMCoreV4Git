@@ -1,9 +1,9 @@
-﻿@model TMCoreV3.DataAccess.Models.Customer.CustomerCoupon
+﻿@model TMWork.DataAccess.Models.Customer.CustomerCoupon
 @using System.Collections.Generic
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
-@using TMCoreV3.DataAccess.Models.User
-@using TMCoreV3.DataAccess.Models.Customer
+@using TMWork.DataAccess.Models.User
+@using TMWork.DataAccess.Models.Customer
 @inject SignInManager<AuthUser> SignInManager
 
 @{
@@ -13,7 +13,7 @@
 <div class="col-lg-12">
     <h2 class="page-header">Coupons</h2>
     <h4 />
-    @(Html.Kendo().Grid<TMCoreV3.DataAccess.Models.Customer.CustomerCoupon>()
+    @(Html.Kendo().Grid<TMWork.DataAccess.Models.Customer.CustomerCoupon>()
               .Name("grid")
               .Columns(columns =>
               {

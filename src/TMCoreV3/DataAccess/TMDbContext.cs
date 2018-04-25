@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TMCoreV3.ViewModels;
-using TMCoreV3.DataAccess.Models.User;
-using TMCoreV3.DataAccess.Models.Customer;
+using TMWork.ViewModels;
+using TMWork.DataAccess.Models.User;
+using TMWork.DataAccess.Models.Customer;
 using Microsoft.EntityFrameworkCore.Metadata;
-using TMCoreV3.DataAccess.Models.Invoice;
+using TMWork.DataAccess.Models.Invoice;
 
-namespace TMCoreV3.DataAccess
+namespace TMWork.DataAccess
 {
     public class TMDbContext : IdentityDbContext<AuthUser,AuthRole,string>
     {

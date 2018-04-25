@@ -1,12 +1,12 @@
 ﻿@using Kendo.Mvc.UI;
 @using Microsoft.AspNetCore.Identity
-@using TMCoreV3.ViewModels
-@using TMCoreV3.DataAccess.Models.User
-@using TMCoreV3.Services
+@using TMWork.ViewModels
+@using TMWork.DataAccess.Models.User
+@using TMWork.Services
 
 @inject SignInManager<AuthUser> SignInManager
 @inject UserManager<AuthUser> UserManager
-@inject TMCoreV3.Services.GlobalService dateFormat
+@inject TMWork.Services.GlobalService dateFormat
 
 @{
     ViewData["Title"] = "Home";
@@ -115,7 +115,7 @@
     </div>
 
 <div class="demo-section k-content wide">
-    @(Html.Kendo().ListView<TMCoreV3.DataAccess.Models.Customer.CustomerCoupon>()
+    @(Html.Kendo().ListView<TMWork.DataAccess.Models.Customer.CustomerCoupon>()
                     .Name("cupounListView")
                     .TagName("div")
                     .ClientTemplateId("cupounListViewTemplate")
@@ -129,7 +129,7 @@
 </div>
 }
 <hr />
-@*@(Html.Kendo().Grid<TMCoreV3.ViewModels.CustomerViewModels.CustomerForm>()
+@*@(Html.Kendo().Grid<TMWork.ViewModels.CustomerViewModels.CustomerForm>()
           .Name("grid")
           .Columns(columns =>
           {
